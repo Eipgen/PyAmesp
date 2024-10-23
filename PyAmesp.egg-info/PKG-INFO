@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: PyAmesp
+Version: 1.0
+Home-page: https://www.amesp.xyz
+Maintainer: J. Zhao, D. Yang, YF. Zhang
+Maintainer-email: 
+License: LGPLv2.1+
+Platform: unix
+Classifier: License :: OSI Approved :: GNU Lesser General Public License v2 or later (LGPLv2+)
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Requires-Python: >=3.6
+License-File: LICENSE
+Requires-Dist: numpy>=1.11.3
+Requires-Dist: ase>=3.20.0

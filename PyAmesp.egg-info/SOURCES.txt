@@ -1,0 +1,10 @@
+LICENSE
+README.md
+setup.py
+PyAmesp/__init__.py
+PyAmesp/amesp.py
+PyAmesp.egg-info/PKG-INFO
+PyAmesp.egg-info/SOURCES.txt
+PyAmesp.egg-info/dependency_links.txt
+PyAmesp.egg-info/requires.txt
+PyAmesp.egg-info/top_level.txt

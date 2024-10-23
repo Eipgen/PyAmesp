@@ -115,8 +115,6 @@ class Amesp(FileIOCalculator):
             self.results['energy'] = parse_aop_energy(text, nimage)[-1]
             """forces"""
             self.results['forces'] = parse_aop_force(text)
-            """density matrix"""
-            self.results["DM"] = parse_aop_force(text)
 
 
 class GaussianExternal:
@@ -351,54 +349,6 @@ def parse_aop_force(text):
         force_data = None
     return force_data
 
-def fill_matrix(data):
-
-    max_index = int(max([row[0] for row in data]))
-    matrix=np.zeros((max_index,max_index))
-    for row in data:
-        i,j,value=int(row[0]),int(row[1]),row[2]
-        matrix[i-1][j-1] = value
-        matrix[j-1][i-1] = value
-    return matrix
-
-def give_matrix(data):
-    int_index=[]
-    for h in range(len(data)):
-        #print(data[h])
-        j=data[h].strip().split()
-        if are_all_integers(j):
-            int_index.append([h,j])
-    num=[[len(data),"end"]]
-    int_index = int_index + num
-    matrix=[]
-    for i in range(len(int_index)-1):
-        data1=data[int_index[i][0]+1:int_index[i+1][0]]
-        intnum=int_index[i][1]
-        for j in data1:
-            row_j=j.strip().split()
-            for k in range(len(row_j[1:])):
-                matrix.append([int(row_j[0]),int(intnum[k]),float(row_j[1:][k])])
-    matrix=np.array(matrix)
-    matrix_end = fill_matrix(matrix)
-    return matrix_end
-
-def parse_aop_density_matrix(text):
-    def extract_data(filename):
-    start_marker = "Density Matrix:"
-    end_marker = "Full Mulliken population analysis:"
-    with open(filename, 'r') as file:
-        lines = file.readlines()
-    start_index = end_index = None
-    for i, line in enumerate(lines):
-        if start_marker in line:
-            start_index = i + 1
-        if end_marker in line:
-            end_index = i-1
-            break
-    extracted_lines = lines[start_index:end_index] if start_index and end_index else []
-    extracted_lines = [j.strip() for j in extracted_lines]
-    matrix = give_matrix(extracted_lines)
-    return matrix
 
 @reader
 def iread_aop(fd):
